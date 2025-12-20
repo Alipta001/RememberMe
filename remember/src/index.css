@@ -1,0 +1,58 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 153, 255, 0.12) 0%, transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(0, 102, 255, 0.15) 0%, transparent 50%),
+              linear-gradient(135deg, #020617 0%, #00091a 100%);
+  background-attachment: fixed;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Soft floating light effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 30%, rgba(0, 195, 255, 0.08), transparent 60%),
+              radial-gradient(circle at 30% 70%, rgba(0, 110, 255, 0.1), transparent 60%);
+  mix-blend-mode: screen;
+  filter: blur(60px);
+  animation: moveGlow 15s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+/* Optional floating particle glow for extra richness */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 120px 120px;
+  opacity: 0.05;
+  animation: pulseGrid 10s ease-in-out infinite alternate;
+  z-index: -2;
+}
+
+@keyframes moveGlow {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  100% { transform: translate(-20px, 20px) scale(1.1); opacity: 0.8; }
+}
+
+@keyframes pulseGrid {
+  0% { opacity: 0.04; }
+  100% { opacity: 0.08; }
+}

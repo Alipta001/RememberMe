@@ -1,0 +1,159 @@
+/* ✨ Frosted Background */
+.luxury-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 20, 0.65);
+  backdrop-filter: blur(12px) saturate(180%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease;
+  z-index: 1000;
+}
+
+/* 💎 Modal Container */
+.luxury-modal {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+  padding: 30px 35px;
+  width: 480px;
+  max-width: 90%;
+  color: #fff;
+  animation: slideUp 0.5s ease;
+  font-family: "Poppins", sans-serif;
+  backdrop-filter: blur(20px);
+}
+
+/* 🌟 Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 10px;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, #6f86d6, #48c6ef);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #bbb;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #ff4b5c;
+  transform: scale(1.2);
+}
+
+/* 🧾 Form Styling */
+.modal-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.modal-form label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.modal-form input {
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 15px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.modal-form input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(72, 198, 239, 0.4);
+}
+
+.error {
+  color: #ff5f6d;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+/* ⚡ Action Buttons */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.btn-save {
+  flex: 1;
+  background: linear-gradient(135deg, #6f86d6, #48c6ef);
+  border: none;
+  border-radius: 30px;
+  padding: 12px 0;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(72, 198, 239, 0.3);
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(72, 198, 239, 0.4);
+}
+
+.btn-cancel {
+  flex: 1;
+  margin-left: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  padding: 12px 0;
+  color: #ddd;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: white;
+}
+
+/* 🌌 Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

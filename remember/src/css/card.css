@@ -1,0 +1,90 @@
+/* STUDENT CARD */
+.student-card {
+  width: 300px;                    /* FIXED WIDTH (DESKTOP) */
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 20px;
+  color: #ffffff;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.student-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+}
+
+/* CARD CONTENT */
+.student-card-info h3 {
+  color: #38bdf8;
+  margin-bottom: 8px;
+}
+
+.student-card-info p {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  margin: 4px 0;
+}
+
+.student-card-info span {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* CARD ACTION BUTTONS */
+.student-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.btn {
+  flex: 1;
+  padding: 6px 0;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.view-btn {
+  background: #0ea5e9;
+  color: #ffffff;
+}
+
+.view-btn:hover {
+  background: #0284c7;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* 📱 MOBILE FIX — ALWAYS 2 CARDS PER ROW */
+@media (max-width: 450px) {
+  .student-card {
+    width: calc(50% - 10px);      /* EXACT FIX */
+  }
+
+  .student-card-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 8px 0;
+  }
+}

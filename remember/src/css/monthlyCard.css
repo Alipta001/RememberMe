@@ -1,0 +1,284 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* ===============================
+   CARD BASE DESIGN
+   =============================== */
+.card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 180, 255, 0.2);
+  border-radius: 18px;
+  padding: 22px;
+  max-width: 340px;
+  height: max-content; /* Fixed height for large screens */
+  margin: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Subtle blue light ring effect */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 200, 255, 0.15),
+    rgba(0, 100, 255, 0.05)
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: scale(1.1);
+  border-radius: inherit;
+  z-index: 0;
+}
+
+/* Hover: smooth elevation, glow, and gradient border */
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 35px rgba(0, 180, 255, 0.25);
+  border-color: rgba(0, 200, 255, 0.5);
+}
+
+.card:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===============================
+   CARD CONTENT
+   =============================== */
+.card-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Keeps button at bottom */
+  height: 100%;
+}
+
+.card-title {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.6px;
+  background: linear-gradient(90deg, #00b4ff, #007bff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-text {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+/* .btn-primary {
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.25);
+  align-self: center;
+} */
+
+/* .btn-primary:hover {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  box-shadow: 0 0 25px rgba(0, 195, 255, 0.4);
+  transform: translateY(-2px);
+} */
+
+/* ===============================
+   RESPONSIVE HEIGHTS
+   =============================== */
+
+/* 🟡 Medium screens */
+@media (max-width: 992px) {
+  .card {
+    height: max-content;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* 🟢 Small screens */
+@media (max-width: 600px) {
+  .card {
+    height: max-content;
+    max-width: 250px;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .card-text {
+    font-size: 0.85rem;
+  }
+
+/*   .btn-primary {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+  } */
+}
+
+
+
+.paidBtn {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.paidBtn .btn {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 8px 18px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Paid Button */
+.paidBtn .btn:first-child {
+  background: linear-gradient(135deg, #00b09b, #96c93d);
+  border: none;
+}
+
+.paidBtn .btn:first-child:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(23, 138, 220, 0.3);
+  
+}
+
+/* Unpaid Button */
+.paidBtn .btn:last-child {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  border: none;
+}
+
+.paidBtn .btn:last-child:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(85, 18, 6, 0.3);
+}
+
+
+/* Responsive styling for small screens */
+@media (max-width: 600px) {
+  .paidBtn {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .paidBtn .btn {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}
+
+/**after paid card style*/
+.paidCard {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background-clip: padding-box;
+  box-shadow: 0 0 25px rgba(0, 255, 157, 0.25),
+              inset 0 0 10px rgba(0, 255, 157, 0.15);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(-4px) scale(1.02);
+  transition: all 0.4s ease-in-out;
+}
+
+/* Glowing animated gradient border */
+.paidCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(120deg, #00ff9d, #00b4ff, #0072ff, #00ff9d);
+  background-size: 300% 300%;
+  animation: gradientFlow 6s ease infinite;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 0;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Smooth glow hover */
+.paidCard:hover {
+  box-shadow: 0 0 45px rgba(0, 255, 157, 0.35),
+              inset 0 0 15px rgba(0, 255, 157, 0.15);
+  transform: translateY(-6px) scale(1.04);
+}
+
+
+
+
+.btn-paid {
+  background: linear-gradient(90deg, #00ff9d, #00b4ff);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 10px 22px;
+  box-shadow: 0 0 25px rgba(0, 255, 157, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-paid:hover {
+  background: linear-gradient(90deg, #00b4ff, #00ff9d);
+  box-shadow: 0 0 35px rgba(0, 255, 157, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Paid Button Active */
+.btn-paid:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+}
+
+
+.btn-unpaid {
+  background: linear-gradient(90deg, #ff5f6d, #ffc371);
+  color: #fff;
+  box-shadow: 0 0 25px rgba(255, 100, 100, 0.4);
+}
+
+.btn-unpaid:hover {
+  background: linear-gradient(90deg, #ff9966, #ff5f6d);
+  box-shadow: 0 0 35px rgba(255, 120, 120, 0.6);
+  transform: translateY(-2px);
+}
+

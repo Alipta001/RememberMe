@@ -186,6 +186,85 @@ router.put("/:id", auth, async (req, res) => {
   }
 });
 
+
+/* =====================================================
+   ADD WEEKDAYS
+   ===================================================== */
+router.put("/:id/weekdays", auth, async (req, res) => {
+  const { day } = req.body;
+
+  if (!day) {
+    return res.status(400).json({ msg: "Day is required" });
+  }
+
+  try {
+    const student = await Student.findOne({
+      _id: req.params.id,
+      createdBy: req.user.id,
+    });
+
+    if (!student) {
+      return res.status(404).json({ msg: "Student not found" });
+    }
+
+    if (!student.weekdays) {
+      student.weekdays = [];
+    }
+
+    // prevent duplicates
+    if (!student.weekdays.includes(day)) {
+      student.weekdays.push(day);
+    }
+
+    await student.save();
+
+    res.status(200).json({
+      success: true,
+      weekdays: student.weekdays,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
+/* =====================================================
+   REMOVE WEEKDAY
+   ===================================================== */
+router.put("/:id/weekdays/remove", auth, async (req, res) => {
+  const { day } = req.body;
+
+  if (!day) {
+    return res.status(400).json({ msg: "Day is required" });
+  }
+
+  try {
+    const student = await Student.findOne({
+      _id: req.params.id,
+      createdBy: req.user.id,
+    });
+
+    if (!student) {
+      return res.status(404).json({ msg: "Student not found" });
+    }
+
+    student.weekdays = student.weekdays.filter(
+      (d) => d !== day
+    );
+
+    await student.save();
+
+    res.status(200).json({
+      success: true,
+      weekdays: student.weekdays,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
+
 /* =====================================================
    DELETE STUDENT
    ===================================================== */
@@ -209,7 +288,30 @@ router.delete("/:id", auth, async (req, res) => {
 /* =====================================================
    ADD MONTHLY FEES
    ===================================================== */
-router.post("/:id/fees", auth, async (req, res) => {
+// router.post("/:id/fees", auth, async (req, res) => {
+//   const { month } = req.body;
+
+//   try {
+//     const student = await Student.findOne({
+//       _id: req.params.id,
+//       createdBy: req.user.id,
+//     });
+
+//     if (!student) return res.status(404).json({ msg: "Student not found" });
+
+//     if (!student.feesPaidMonths.includes(month)) {
+//       student.feesPaidMonths.push(month);
+//     }
+
+//     await student.save();
+//     res.json(student);
+//   } catch (err) {
+//     res.status(500).json({ msg: "Server error" });
+//   }
+// });
+
+// Update student fees (idempotent)
+router.put("/:id/fees", auth, async (req, res) => {
   const { month } = req.body;
 
   try {
@@ -220,6 +322,7 @@ router.post("/:id/fees", auth, async (req, res) => {
 
     if (!student) return res.status(404).json({ msg: "Student not found" });
 
+    // Only add if not already present
     if (!student.feesPaidMonths.includes(month)) {
       student.feesPaidMonths.push(month);
     }
@@ -230,6 +333,37 @@ router.post("/:id/fees", auth, async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 });
+
+//Delete student fees month
+router.put("/:id/fees/remove", auth, async (req, res) => {
+  const { month } = req.body;
+
+  try {
+    const student = await Student.findOne({
+      _id: req.params.id,
+      createdBy: req.user.id,
+    });
+
+    if (!student) {
+      return res.status(404).json({ msg: "Student not found" });
+    }
+
+    // Remove the month
+    student.feesPaidMonths = student.feesPaidMonths.filter(
+      (m) => m !== month
+    );
+
+    await student.save();
+
+    res.json({
+      success: true,
+      data: student,
+    });
+  } catch (err) {
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
 
 /* =====================================================
    ADD ATTENDANCE

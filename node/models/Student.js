@@ -25,7 +25,7 @@ const StudentSchema = new mongoose.Schema({
   class: { type: String, required: true },
   schoolName: { type: String, required: true },
   phone: { type: String, required: true },
-  admissionDate: { type: Date, required: true},
+  admissionDate: { type: Date, required: true },
   address: { type: String },
 
   // Monthly fees tracking
@@ -43,11 +43,19 @@ const StudentSchema = new mongoose.Schema({
     },
   ],
 
+  // Weekdays selected by admin
+  weekdays: [
+    {
+      type: String, // e.g., "Mon", "Tue", etc.
+    },
+  ],
+
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
 }, { timestamps: true });
+
 
 module.exports = mongoose.model("Student", StudentSchema);

@@ -27,7 +27,7 @@ import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("email")
     navigate("/");
@@ -71,7 +71,7 @@ export default function Navbar() {
                 Pay
               </a>
             </li>
-            <li><button onClick={handleLogout}>LogOut</button></li>
+            <li className="nav-item"><button className="nav-link" onClick={handleLogout}>LogOut</button></li>
           </ul>
         </div>
       </div>

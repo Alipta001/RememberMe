@@ -5,7 +5,6 @@ import AxiosInstance from "../../../api/axios/axios";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function OtpPage() {
-  const userId = localStorage.getItem("userId");
   const email = localStorage.getItem("email");
 
   const handleChange = (e, index) => {

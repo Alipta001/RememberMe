@@ -2,10 +2,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import * as yup from "yup";
 import { endPoints } from "../../../api/endPoints/endPoints";
 import AxiosInstance from "../../../api/axios/axios";
+import "../../../css/registerCss/register.css"
 
 const schema = yup.object().shape({
   name: yup
@@ -72,61 +73,48 @@ export default function Register() {
   };
   return (
     <>
-      <h1>Register</h1>
-      <form
-        onSubmit={handleSubmit(handleClick)}
-        // style={{ display: "flex", flexDirection: "column" }}
-      >
-        <label htmlFor="name">First Name:</label>
+     <div className="register-page">
+  <div className="register-container">
+    <h1 className="register-title">Register</h1>
+    <form onSubmit={handleSubmit(handleClick)} className="register-form">
+
+      <div className="form-group">
         <input
+          type="text"
           {...register("name", { required: true })}
-          style={{ marginBottom: "10px", marginLeft: "10px" }}
-          placeholder="Enter your name"
+          placeholder=" "
         />
-        {errors.name && (
-          <span
-            style={{ color: "red", marginBottom: "10px", marginLeft: "10px" }}
-          >
-            {errors.name.message}
-          </span>
-        )}
-        <br />
+        <label>First Name</label>
+        {errors.name && <span className="error-msg">{errors.name.message}</span>}
+      </div>
 
-        <label htmlFor="email">Email:</label>
+      <div className="form-group">
         <input
+          type="email"
           {...register("email", { required: true })}
-          style={{ marginBottom: "10px", marginLeft: "10px" }}
-          placeholder="Enter your Email"
+          placeholder=" "
         />
-        {errors.email && (
-          <span
-            style={{ color: "red", marginBottom: "10px", marginLeft: "10px" }}
-          >
-            {errors.email.message}
-          </span>
-        )}
-        <br />
+        <label>Email</label>
+        {errors.email && <span className="error-msg">{errors.email.message}</span>}
+      </div>
 
-        <label htmlFor="password">Password:</label>
+      <div className="form-group">
         <input
+          type="password"
           {...register("password", { required: true })}
-          style={{ marginBottom: "10px", marginLeft: "10px" }}
-          placeholder="Enter your Password"
+          placeholder=" "
         />
-        {errors.password && (
-          <span
-            style={{ color: "red", marginBottom: "10px", marginLeft: "10px" }}
-          >
-            {errors.password.message}
-          </span>
-        )}
-        <br />
-        <br />
+        <label>Password</label>
+        {errors.password && <span className="error-msg">{errors.password.message}</span>}
+      </div>
 
-        <input type="submit" />
-        <br />
-        {/* <Link to="/auth/otp"></Link> */}
-      </form>
+      <input type="submit" className="submit-btn" value="Register" />
+
+      <Link to="/" className="login-link">Already have an account? Login</Link>
+
+    </form>
+  </div>
+</div>
     </>
   );
 }

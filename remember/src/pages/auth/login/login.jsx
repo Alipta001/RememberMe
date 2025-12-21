@@ -67,10 +67,6 @@ export default function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate()
 
-  const handle = (e) => {
-    const { name, value } = e.target;
-    setUser((prev) => ({ ...prev, [name]: value }));
-  };
 
   const handleClick = async(data) => {
     console.log(data);

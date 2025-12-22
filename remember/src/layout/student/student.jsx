@@ -11,7 +11,7 @@
 
 //   /*  useEffect(() => {
 //   fetchStudents();
-// },[]) */ 
+// },[]) */
 
 // // useEffect(() => {
 // //     const fetchStudents = async () => {
@@ -59,7 +59,6 @@
 //   return () => window.removeEventListener("student-added", handler);
 //   }, []);
 
-
 //   //delete student
 //   const deleteStudent = async(id) =>{
 //     try{
@@ -69,7 +68,6 @@
 //       console.log(error)
 //     }
 //   }
-
 
 //   return (
 //   <div className="container text-center my-5">
@@ -99,7 +97,6 @@
 // );
 // }
 
-
 import { useEffect, useState } from "react";
 import Card from "../../component/card/card";
 import "../../css/student.css";
@@ -108,6 +105,7 @@ import { endPoints } from "../../api/endPoints/endPoints";
 
 export default function Student() {
   const [students, setStudents] = useState([]);
+  const [showStudents, setShowStudents] = useState(8);
 
   const fetchStudents = async () => {
     try {
@@ -125,6 +123,9 @@ export default function Student() {
     return () => window.removeEventListener("student-added", handler);
   }, []);
 
+ 
+
+
   const deleteStudent = async (id) => {
     try {
       await AxiosInstance.delete(`${endPoints.student.delete}/${id}`);
@@ -134,26 +135,28 @@ export default function Student() {
     }
   };
 
- 
   return (
     <div className="student-page-wrapper">
-  <div className="student-page-header">
-    <h2 className="student-title">STUDENTS</h2>
-  </div>
+      <div className="student-page-header">
+        <h2 className="student-title">STUDENTS</h2>
+      </div>
 
-  {students.length > 0 ? (
-    <div className="student-cards-container">
-      {students.map((student, idx) => (
-        <Card key={idx} student={student} deleteStudent={deleteStudent} />
-      ))}
+      {students.length > 0 ? (
+        <div className="student-cards-container">
+          {students.slice(0, showStudents).map((student, idx) => (
+            <Card key={idx} student={student} deleteStudent={deleteStudent} />
+          ))}
+        </div>
+      ) : (
+        <div className="no-data-card">
+          <h5>No Students Available</h5>
+          <p className="no-student-text">You haven’t added any students yet.</p>
+        </div>
+      )}
+      <div className="showMore">
+        <button onClick={()=>setShowStudents(showStudents + 4)}>SHOW MORE</button>
+        <button onClick={()=>{if(showStudents !==8)setShowStudents(showStudents -4)}}>SHOW LESS</button>
+      </div>
     </div>
-  ) : (
-    <div className="no-data-card">
-      <h5>No Students Available</h5>
-      <p className="no-student-text">You haven’t added any students yet.</p>
-    </div>
-  )}
-</div>
-
   );
 }

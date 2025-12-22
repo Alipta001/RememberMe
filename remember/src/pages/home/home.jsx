@@ -35,7 +35,7 @@ export default function Home({ students, addStudent }) {
     <>
       <Navbar />
       <HomeDashboard addStudent={addStudent}/>
-      <Student students={students} />
+      <Student />
 
      
         {/* <AddStudent

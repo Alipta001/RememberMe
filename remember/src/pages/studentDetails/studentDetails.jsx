@@ -7,10 +7,11 @@ import AxiosInstance from "../../api/axios/axios.js";
 import { endPoints } from "../../api/endPoints/endPoints.js";
 export default function StudentDetails() {
   const { id } = useParams();
- /*  console.log(id); */
+  /*  console.log(id); */
   const [data, setData] = useState({});
-  const [feesPaidMonth, setFeesPaidMonth] = useState([])
+  const [feesPaidMonth, setFeesPaidMonth] = useState([]);
   const [weekDays, setWeekDays] = useState([]);
+  const [showFeesMonth, setShowFeesMonth] = useState(4);
 
   const getData = async () => {
     try {
@@ -19,8 +20,8 @@ export default function StudentDetails() {
       );
       /* console.log(response.data.data); */
       setData(response.data.data);
-      setFeesPaidMonth(response.data.data.feesPaidMonths)
-      console.log(response.data.data.feesPaidMonths, "feesPaidMonths array")
+      setFeesPaidMonth(response.data.data.feesPaidMonths);
+      console.log(response.data.data.feesPaidMonths, "feesPaidMonths array");
       /* console.log(response.data.data.weekdays, "weekdays"); */
       setWeekDays(response.data.data.weekdays);
     } catch (error) {
@@ -34,8 +35,8 @@ export default function StudentDetails() {
 
   const fessPaid = async (month) => {
     console.log(month);
-    
-      try {
+
+    try {
       const response = await AxiosInstance.put(
         `${endPoints.student.details}/${id}/fees`,
         {
@@ -47,29 +48,26 @@ export default function StudentDetails() {
     } catch (error) {
       console.log(error);
     }
-    
-    
   };
 
   //Delete student fees paid month
-  const deletePaidMonth =async(month) =>{
-  if(feesPaidMonth.includes(month)){
-      try{
-        const deleteFeesPaidMonth = await AxiosInstance.put(`${endPoints.student.details}/${id}/fees/remove`,{month})
-        
-        if(deleteFeesPaidMonth.data.success === true){
-          /* console.log(deleteFeesPaidMonth, "After deleteFeesPaidMonth") */
-          getData()
+  const deletePaidMonth = async (month) => {
+    if (feesPaidMonth.includes(month)) {
+      try {
+        const deleteFeesPaidMonth = await AxiosInstance.put(
+          `${endPoints.student.details}/${id}/fees/remove`,
+          { month }
+        );
 
+        if (deleteFeesPaidMonth.data.success === true) {
+          /* console.log(deleteFeesPaidMonth, "After deleteFeesPaidMonth") */
+          getData();
         }
-      }catch(error){
+      } catch (error) {
         console.log(error);
       }
     }
-  }
-
-
-
+  };
 
   //Add Weekdays in the database
   const addWeekDays = async (day) => {
@@ -91,7 +89,7 @@ export default function StudentDetails() {
         );
         /* console.log(response, "Weekdays response"); */
         if (response.data.success === true) {
-         /*  console.log(response.data.success); */
+          /*  console.log(response.data.success); */
           getData();
         }
       } catch (error) {
@@ -99,6 +97,14 @@ export default function StudentDetails() {
       }
     }
   };
+
+  //set how many month to show
+  const handleShowMonth = () =>{
+    if(showFeesMonth !==4)
+      setShowFeesMonth(4);
+    else
+      setShowFeesMonth(12)
+  }
 
   const months = [
     "January",
@@ -153,14 +159,23 @@ export default function StudentDetails() {
           <p>Time: 6-8</p>
         </div>
         <div className="monthSection">
-          <div className="row g-4 justify-content-center custom-grid">
-            {months.map((month, index) => {
+          <div className="row g-3 justify-content-center custom-grid">
+            {months.slice(0, showFeesMonth).map((month, index) => {
               return (
-                <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
-                  <MonthCard month={month} monthId={index} onPaid={fessPaid} deletePaidMonth={deletePaidMonth} feesPaidMonth={feesPaidMonth}/>
+                <div key={index} className="col-6 col-sm-6 col-md-4 col-lg-3">
+                  <MonthCard
+                    month={month}
+                    monthId={index}
+                    onPaid={fessPaid}
+                    deletePaidMonth={deletePaidMonth}
+                    feesPaidMonth={feesPaidMonth}
+                  />
                 </div>
               );
             })}
+            <div className="showBtn">
+              <button className="show-toggle-btn" onClick={() => handleShowMonth()}>{showFeesMonth===4? "SHOW ALL" : "ShOW LESS"}</button>
+            </div>
           </div>
         </div>
       </div>

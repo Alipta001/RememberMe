@@ -5,7 +5,7 @@
   width: 100%;
   max-width: 1320px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 60px 0;
   box-sizing: border-box;
 }
 
@@ -49,6 +49,85 @@
   width: 100%;
   box-sizing: border-box;
 }
+/* =========================
+   SHOW MORE / LESS WRAPPER
+========================= */
+.showMore {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 40px 0 20px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   BASE BUTTON STYLE
+========================= */
+.showMore button {
+  min-width: 140px;
+  padding: 12px 28px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+/* =========================
+   SHOW MORE BUTTON
+========================= */
+.showMore button:first-child {
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+  color: #ffffff;
+  box-shadow: 0 8px 22px rgba(14, 165, 233, 0.35);
+}
+
+.showMore button:first-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(14, 165, 233, 0.5);
+}
+
+/* =========================
+   SHOW LESS BUTTON
+========================= */
+.showMore button:last-child {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f7faff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+}
+
+.showMore button:last-child:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* =========================
+   ACTIVE / CLICK STATE
+========================= */
+.showMore button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 450px) {
+  .showMore {
+    gap: 12px;
+  }
+
+  .showMore button {
+    width: 48%;
+    padding: 11px 0;
+    font-size: 0.85rem;
+  }
+}
+
 
 /* =========================
    TABLET (≤1024px)

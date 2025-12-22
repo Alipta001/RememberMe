@@ -9,7 +9,7 @@
 /* ===== Custom Navbar ===== */
 .custom-navbar {
   background: var(--nav-bg) !important;
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(50px);
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.4s ease;

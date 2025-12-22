@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import "../../css/addStudentCss/addStudent.css"
+import styles from '../../css/addStudentCss/addStudent.module.css'
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import AxiosInstance from "../../api/axios/axios";
@@ -137,64 +137,66 @@ export default function AddStudent({ onClose}) {
 
 
 
-     <div className="luxury-modal-overlay">
-      <div className="luxury-modal">
-        <div className="modal-header">
-          <h3 className="modal-title">Add New Student</h3>
-          <button className="close-btn" onClick={onClose}>
-            ✕
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit(addStudent)} className="modal-form">
-          <div className="form-group">
-            <label>Name</label>
-            <input type="text" placeholder="Enter name" {...register("name")} />
-            {errors.name && <p className="error">{errors.name.message}</p>}
-          </div>
-
-          <div className="form-group">
-            <label>Class</label>
-            <input type="text" placeholder="Enter class" {...register("class")} />
-            {errors.class && <p className="error">{errors.class.message}</p>}
-          </div>
-
-          <div className="form-group">
-            <label>Phone Number</label>
-            <input type="number" placeholder="Enter phone number" {...register("phone")} />
-            {errors.phone && <p className="error">{errors.phone.message}</p>}
-          </div>
-
-          <div className="form-group">
-            <label>School</label>
-            <input type="text" placeholder="Enter school" {...register("school")} />
-            {errors.school && <p className="error">{errors.school.message}</p>}
-          </div>
-
-          <div className="form-group">
-            <label>Admission Date</label>
-            <input type="date" {...register("admissionDate")} />
-            {errors.admissionDate && (
-              <p className="error">{errors.admissionDate.message}</p>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label>Address</label>
-            <input type="text" placeholder="Enter address" {...register("address")} />
-            {errors.address && <p className="error">{errors.address.message}</p>}
-          </div>
-
-          <div className="modal-actions">
-            <button type="submit" className="btn-save">
-              Save Student
-            </button>
-            <button type="button" className="btn-cancel" onClick={onClose}>
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
+    <div className={styles.luxuryModalOverlay}>
+  <div className={styles.luxuryModal}>
+    {/* Modal Header */}
+    <div className={styles.modalHeader}>
+      <h3 className={styles.modalTitle}>Add New Student</h3>
+      <button className={styles.closeBtn} onClick={onClose}>
+        ✕
+      </button>
     </div>
+
+    {/* Modal Form */}
+    <form onSubmit={handleSubmit(addStudent)} className={styles.modalForm}>
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Name</label>
+        <input type="text" className={styles.input} {...register("name")} />
+        {errors.name && <p className={styles.error}>{errors.name.message}</p>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Class</label>
+        <input type="text" className={styles.input} {...register("class")} />
+        {errors.class && <p className={styles.error}>{errors.class.message}</p>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Phone Number</label>
+        <input type="number" className={styles.input} {...register("phone")} />
+        {errors.phone && <p className={styles.error}>{errors.phone.message}</p>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>School</label>
+        <input type="text" className={styles.input} {...register("school")} />
+        {errors.school && <p className={styles.error}>{errors.school.message}</p>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Admission Date</label>
+        <input type="date" className={styles.input} {...register("admissionDate")} />
+        {errors.admissionDate && (
+          <p className={styles.error}>{errors.admissionDate.message}</p>
+        )}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Address</label>
+        <input type="text" className={styles.input} {...register("address")} />
+        {errors.address && <p className={styles.error}>{errors.address.message}</p>}
+      </div>
+
+      {/* Action Buttons */}
+      <div className={styles.modalActions}>
+        <button type="submit" className={styles.btnSave}>Save Student</button>
+        <button type="button" className={styles.btnCancel} onClick={onClose}>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
   );
 }

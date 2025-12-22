@@ -88,7 +88,7 @@
   padding: 8px 16px;
   font-size: 0.95rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all  ease;
   cursor: pointer;
 }
 
@@ -151,7 +151,7 @@
 }
 
 .custom-grid {
-  row-gap: 25px;
+  row-gap: 8px;
 }
 
 /* === Responsive === */

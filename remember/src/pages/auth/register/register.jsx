@@ -84,7 +84,7 @@ export default function Register() {
           {...register("name", { required: true })}
           placeholder=" "
         />
-        <label>First Name</label>
+        <label>UserName</label>
         {errors.name && <span className="error-msg">{errors.name.message}</span>}
       </div>
 

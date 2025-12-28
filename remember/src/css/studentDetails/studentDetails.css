@@ -226,3 +226,62 @@
   background: linear-gradient(135deg, #00f5a0, #00d9f5);
   box-shadow: 0 0 20px rgba(0, 255, 180, 0.6);
 }
+
+
+/* ===============================
+   EDIT DETAILS BUTTON
+   =============================== */
+.editBtn {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.edit-details-btn {
+  padding: 12px 34px;
+  border-radius: 30px;
+
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #ffffff;
+
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(0, 198, 255, 0.35),
+    inset 0 0 8px rgba(255, 255, 255, 0.25);
+
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.edit-details-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+
+  box-shadow:
+    0 15px 35px rgba(0, 198, 255, 0.55),
+    inset 0 0 10px rgba(255, 255, 255, 0.35);
+}
+
+/* Active */
+.edit-details-btn:active {
+  transform: translateY(0);
+  box-shadow:
+    0 6px 15px rgba(0, 198, 255, 0.35),
+    inset 0 0 12px rgba(255, 255, 255, 0.4);
+}
+@media (max-width: 500px) {
+  .edit-details-btn {
+    padding: 9px 22px;
+    font-size: 0.8rem;
+    letter-spacing: 0.6px;
+    border-radius: 24px;
+  }
+}

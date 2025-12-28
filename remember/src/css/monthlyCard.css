@@ -12,6 +12,7 @@
    BASE CARD (UNPAID)
    =============================== */
 .card {
+  z-index: 1000;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);

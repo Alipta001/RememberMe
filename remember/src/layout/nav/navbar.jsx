@@ -72,6 +72,13 @@ export default function Navbar() {
               </a>
             </li>
             <li className="nav-item"><button className="nav-link" onClick={handleLogout}>LogOut</button></li>
+            <li className="nav-item profile-nav">
+  <a className="nav-link profile-link" href="/profile">
+    <div className="profile-avatar">
+      A
+    </div>
+  </a>
+</li>
           </ul>
         </div>
       </div>

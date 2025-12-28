@@ -1,0 +1,184 @@
+/* =========================
+   OVERLAY
+========================= */
+.editOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 20, 0.75);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.35s ease;
+}
+
+/* =========================
+   MODAL
+========================= */
+.editModal {
+  width: 500px;
+  max-width: 92%;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.08)
+  );
+  border-radius: 26px;
+  padding: 32px 36px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(25px);
+  color: #ffffff;
+  animation: slideUp 0.45s ease;
+}
+
+/* =========================
+   HEADER
+========================= */
+.editHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.editTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #22d3ee, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.editClose {
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #d1d5db;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.editClose:hover {
+  color: #fb7185;
+  transform: rotate(90deg) scale(1.15);
+}
+
+/* =========================
+   FORM
+========================= */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.editGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.editLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.editInput {
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.editInput:focus {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.45);
+}
+
+/* =========================
+   ERROR
+========================= */
+.editError {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #fb7185;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+.editActions {
+  display: flex;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.updateBtn {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(135deg, #22d3ee, #38bdf8);
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(34, 211, 238, 0.45);
+  transition: all 0.3s ease;
+}
+
+.updateBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(34, 211, 238, 0.6);
+}
+
+.cancelBtn {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #f1f5f9;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancelBtn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 480px) {
+  .editModal {
+    padding: 26px 22px;
+  }
+
+  .editTitle {
+    font-size: 1.4rem;
+  }
+}

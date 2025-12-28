@@ -5,6 +5,8 @@ import MonthCard from "../../component/monthCard/monthCard.jsx";
 import { useEffect, useState } from "react";
 import AxiosInstance from "../../api/axios/axios.js";
 import { endPoints } from "../../api/endPoints/endPoints.js";
+import UpdateStudentDetails from "../../component/updateStudentDetails/updateStudentDetails.jsx";
+
 export default function StudentDetails() {
   const { id } = useParams();
   /*  console.log(id); */
@@ -12,6 +14,7 @@ export default function StudentDetails() {
   const [feesPaidMonth, setFeesPaidMonth] = useState([]);
   const [weekDays, setWeekDays] = useState([]);
   const [showFeesMonth, setShowFeesMonth] = useState(4);
+  const [showModal, setShowModal] = useState(false);
 
   const getData = async () => {
     try {
@@ -31,6 +34,9 @@ export default function StudentDetails() {
 
   useEffect(() => {
     getData();
+    const handler = () => getData();
+    window.addEventListener("student-updated", handler);
+    return () => window.removeEventListener("student-updated", handler);
   }, []);
 
   const fessPaid = async (month) => {
@@ -99,12 +105,10 @@ export default function StudentDetails() {
   };
 
   //set how many month to show
-  const handleShowMonth = () =>{
-    if(showFeesMonth !==4)
-      setShowFeesMonth(4);
-    else
-      setShowFeesMonth(12)
-  }
+  const handleShowMonth = () => {
+    if (showFeesMonth !== 4) setShowFeesMonth(4);
+    else setShowFeesMonth(12);
+  };
 
   const months = [
     "January",
@@ -126,9 +130,13 @@ export default function StudentDetails() {
   return (
     <div className="detilsSection">
       <div className="container my-4">
-        <div className="header">
+        {
+          !showModal && (
+            <div className="header">
           <h3>STUDENT DETAILS</h3>
         </div>
+          )
+        }
         <div className="details">
           <p>Name: {data.name}</p>
           <p>class: {data.class}</p>
@@ -157,27 +165,46 @@ export default function StudentDetails() {
             </div>
           </div>
           <p>Time: 6-8</p>
+          <div className="editBtn">
+  <button
+    className="edit-details-btn"
+    onClick={() => setShowModal(true)}
+  >
+    ✏️ Edit Details
+  </button>
+
+  {showModal && (
+    <UpdateStudentDetails onClose={() => setShowModal(false)} />
+  )}
+</div>
         </div>
-        <div className="monthSection">
-          <div className="row g-3 justify-content-center custom-grid">
-            {months.slice(0, showFeesMonth).map((month, index) => {
-              return (
-                <div key={index} className="col-6 col-sm-6 col-md-4 col-lg-3">
-                  <MonthCard
-                    month={month}
-                    monthId={index}
-                    onPaid={fessPaid}
-                    deletePaidMonth={deletePaidMonth}
-                    feesPaidMonth={feesPaidMonth}
-                  />
-                </div>
-              );
-            })}
-            <div className="showBtn">
-              <button className="show-toggle-btn" onClick={() => handleShowMonth()}>{showFeesMonth===4? "SHOW ALL" : "ShOW LESS"}</button>
+        {!showModal && (
+          <div className="monthSection">
+            <div className="row g-3 justify-content-center custom-grid">
+              {months.slice(0, showFeesMonth).map((month, index) => {
+                return (
+                  <div key={index} className="col-6 col-sm-6 col-md-4 col-lg-3">
+                    <MonthCard
+                      month={month}
+                      monthId={index}
+                      onPaid={fessPaid}
+                      deletePaidMonth={deletePaidMonth}
+                      feesPaidMonth={feesPaidMonth}
+                    />
+                  </div>
+                );
+              })}
+              <div className="showBtn">
+                <button
+                  className="show-toggle-btn"
+                  onClick={() => handleShowMonth()}
+                >
+                  {showFeesMonth === 4 ? "SHOW ALL" : "ShOW LESS"}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ export default function Navbar() {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js"; // for collapse toggle
 import "../../css/navbar.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -62,9 +62,9 @@ export default function Navbar() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Student Details
-              </a>
+              
+                <Link to={'/student/attendence'} className="nav-link" href="#">Attendence</Link>
+             
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">

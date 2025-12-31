@@ -1,0 +1,59 @@
+.attendance-container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.date-box {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attendance-table th,
+.attendance-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: center;
+}
+
+.btn {
+  padding: 6px 14px;
+  margin: 0 6px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.present {
+  background-color: #28a745;
+}
+
+.absent {
+  background-color: #dc3545;
+}
+
+.btn.active {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
+}
+
+.output {
+  margin-top: 20px;
+  background: #f8f9fa;
+  padding: 10px;
+  font-size: 12px;
+}

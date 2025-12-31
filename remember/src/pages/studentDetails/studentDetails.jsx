@@ -1,4 +1,4 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../css/studentDetails/studentDetails.css";
 import MonthCard from "../../component/monthCard/monthCard.jsx";
@@ -15,13 +15,16 @@ export default function StudentDetails() {
   const [weekDays, setWeekDays] = useState([]);
   const [showFeesMonth, setShowFeesMonth] = useState(4);
   const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const getData = async () => {
     try {
       const response = await AxiosInstance.get(
         `${endPoints.student.details}/${id}`
       );
-      /* console.log(response.data.data); */
+      console.log(response.data.data);
       setData(response.data.data);
       setFeesPaidMonth(response.data.data.feesPaidMonths);
       console.log(response.data.data.feesPaidMonths, "feesPaidMonths array");
@@ -49,7 +52,7 @@ export default function StudentDetails() {
           month,
         }
       );
-      console.log(response);
+      /* console.log(response); */
       getData();
     } catch (error) {
       console.log(error);
@@ -130,13 +133,11 @@ export default function StudentDetails() {
   return (
     <div className="detilsSection">
       <div className="container my-4">
-        {
-          !showModal && (
-            <div className="header">
-          <h3>STUDENT DETAILS</h3>
-        </div>
-          )
-        }
+        {!showModal && (
+          <div className="header">
+            <h3>STUDENT DETAILS</h3>
+          </div>
+        )}
         <div className="details">
           <p>Name: {data.name}</p>
           <p>class: {data.class}</p>
@@ -165,18 +166,25 @@ export default function StudentDetails() {
             </div>
           </div>
           <p>Time: 6-8</p>
-          <div className="editBtn">
-  <button
-    className="edit-details-btn"
-    onClick={() => setShowModal(true)}
-  >
-    ✏️ Edit Details
-  </button>
+          <div className="actionButtons">
+  <div className="editBtn">
+    <button
+      className="edit-details-btn"
+      onClick={() => setShowModal(true)}
+    >
+      ✏️ Edit Details
+    </button>
 
-  {showModal && (
-    <UpdateStudentDetails onClose={() => setShowModal(false)} />
-  )}
+    {showModal && (
+      <UpdateStudentDetails onClose={() => setShowModal(false)} />
+    )}
+  </div>
+
+  <button className="attendance-btn">
+    📊 View Attendance
+  </button>
 </div>
+
         </div>
         {!showModal && (
           <div className="monthSection">

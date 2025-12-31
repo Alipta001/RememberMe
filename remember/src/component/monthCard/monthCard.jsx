@@ -30,15 +30,14 @@ import "../../css/monthlyCard.css";
 
 export default function MonthCard({
   month,
-  id,
   onPaid,
   feesPaidMonth,
   deletePaidMonth,
 }) {
   /*  const [paid, setPaid] = useState(false); */
-  console.log(feesPaidMonth);
+  /* console.log(feesPaidMonth); */
   const isPaid = feesPaidMonth?.includes(month);
-  console.log(isPaid);
+ /*  console.log(isPaid); */
 
   return (
     <div className={`card ${isPaid ? "paidCard" : ""}`}>

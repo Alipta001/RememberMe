@@ -38,7 +38,7 @@ const StudentSchema = new mongoose.Schema({
   // Attendance tracking
   attendance: [
     {
-      date: { type: Date, required: true },
+      date: { type: String, required: true },
       present: { type: Boolean, default: true },
     },
   ],

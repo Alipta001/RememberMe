@@ -51,7 +51,11 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/authMiddleware");
 const Student = require("../models/Student");
-
+const { getIndianDate } = require("../utils/getIndianDate");
+/* router.use((req, res, next) => {
+  console.log("Student router hit:", req.method, req.originalUrl);
+  next();
+}); */
 /* =====================================================
    CREATE STUDENT
    ===================================================== */
@@ -368,8 +372,8 @@ router.put("/:id/fees/remove", auth, async (req, res) => {
 /* =====================================================
    ADD ATTENDANCE
    ===================================================== */
-router.post("/:id/atendence", auth, async (req, res) => {
-  const { date, present } = req.body;
+router.post("/:id/attendance", auth, async (req, res) => {
+  const { present } = req.body; // ❌ do NOT accept date from frontend
 
   try {
     const student = await Student.findOne({
@@ -377,16 +381,96 @@ router.post("/:id/atendence", auth, async (req, res) => {
       createdBy: req.user.id,
     });
 
-    if (!student) return res.status(404).json({ msg: "Student not found" });
+    if (!student) {
+      return res.status(404).json({ msg: "Student not found" });
+    }
 
-    student.attendance.push({ date, present });
+    // ✅ Always generate Indian date on backend
+    const indianDate = getIndianDate();
+
+    // ❌ Prevent duplicate attendance for same date
+    const alreadyMarked = student.attendance.find(
+      (a) => a.date === indianDate
+    );
+
+    if (alreadyMarked) {
+      return res.status(409).json({
+        msg: "Attendance already marked for today",
+      });
+    }
+
+    // ✅ Store date as STRING (no time)
+    student.attendance.push({
+      date: indianDate,
+      present: present === true,
+    });
+
     await student.save();
 
-    res.json(student);
+    res.json({
+      success: true,
+      date: indianDate,
+      attendance: student.attendance,
+    });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ msg: "Server error" });
   }
 });
+
+// DELETE attendance for a specific day
+router.delete("/:id/attendance", auth, async (req, res) => {
+  const { date, present } = req.body; // date = "YYYY-MM-DD"
+
+  if (!date) {
+    return res.status(400).json({ msg: "Date is required" });
+  }
+
+  try {
+    const student = await Student.findOne({
+      _id: req.params.id,
+      createdBy: req.user.id,
+    });
+
+    if (!student) {
+      return res.status(404).json({ msg: "Student not found" });
+    }
+
+    // Allow delete only when marking absent
+    if (present !== false) {
+      return res.status(400).json({
+        msg: "Attendance can be deleted only when present = false",
+      });
+    }
+
+    const beforeLength = student.attendance.length;
+
+    // Delete attendance for the given date
+    student.attendance = student.attendance.filter(
+      (a) => a.date !== date
+    );
+
+    if (student.attendance.length === beforeLength) {
+      return res.status(404).json({
+        msg: "Attendance not found for this date",
+      });
+    }
+
+    await student.save();
+
+    res.json({
+      success: true,
+      msg: "Attendance deleted successfully",
+      deletedDate: date,
+      attendance: student.attendance,
+    });
+  } catch (err) {
+    console.error("Delete attendance error:", err);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
+
 
 /* =====================================================
    ATTENDANCE REPORT

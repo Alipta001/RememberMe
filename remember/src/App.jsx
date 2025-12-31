@@ -9,6 +9,7 @@ import AddStudent from './component/addStudent/addStudent'
 import Login from './pages/auth/login/login'
 import Register from './pages/auth/register/register'
 import OtpPage from './pages/auth/otp/otp';
+import Attendance from './pages/attendence/attendence';
 
 
 function Private({children}){
@@ -92,6 +93,10 @@ function App() {
     {
       path:'/student/details/:id',
       component:<StudentDetails />
+    },
+    {
+      path: '/student/attendence',
+      component: <Attendance />
     }
   ]
   return (

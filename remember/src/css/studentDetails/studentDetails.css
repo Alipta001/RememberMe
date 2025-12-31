@@ -231,11 +231,6 @@
 /* ===============================
    EDIT DETAILS BUTTON
    =============================== */
-.editBtn {
-  display: flex;
-  justify-content: center;
-  margin: 30px 0;
-}
 
 .edit-details-btn {
   padding: 12px 34px;
@@ -279,6 +274,72 @@
 }
 @media (max-width: 500px) {
   .edit-details-btn {
+    padding: 9px 22px;
+    font-size: 0.8rem;
+    letter-spacing: 0.6px;
+    border-radius: 24px;
+  }
+}
+/* ===============================
+   ACTION BUTTON GROUP
+   =============================== */
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+/* ===============================
+   VIEW ATTENDANCE BUTTON (MATCHED)
+   =============================== */
+.attendance-btn {
+  padding: 12px 34px;
+  border-radius: 30px;
+
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  color: #ffffff;
+
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(14, 165, 233, 0.35),
+    inset 0 0 8px rgba(255, 255, 255, 0.25);
+
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.attendance-btn:hover {
+  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 16px 40px rgba(14, 165, 233, 0.55),
+    inset 0 0 10px rgba(255, 255, 255, 0.35);
+}
+
+/* Active */
+.attendance-btn:active {
+  transform: translateY(0);
+
+  box-shadow:
+    0 6px 15px rgba(14, 165, 233, 0.35),
+    inset 0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+/* ===============================
+   MOBILE (≤500px)
+   =============================== */
+@media (max-width: 500px) {
+  .attendance-btn {
     padding: 9px 22px;
     font-size: 0.8rem;
     letter-spacing: 0.6px;

@@ -10,7 +10,8 @@ export const endPoints = {
         details: `/api/students`,
         list:`/api/students/list`,
         update:`/api/students`,
-        delete:`/api/students`
+        delete:`/api/students`,
+        attendance: `/api/students`
     }
 }
 
@@ -21,7 +22,8 @@ export const points = [
   endPoints.auth.otp,
   endPoints.student.details,
   endPoints.student.list,
-  endPoints.student.delete
+  endPoints.student.delete,
+  endPoints.student.attendance
    /*  endPoints.auth.resetemail,
     endPoints.product.create,
   endPoints.product.list,

@@ -2,8 +2,8 @@ import axios from "axios";
 
 /* export const baseURL = import.meta.env.VITE_API_URL; */
 const AxiosInstance = axios.create({
-   /* baseURL: import.meta.env.VITE_API_URL, */
-   baseURL: `http://localhost:5000`,
+   baseURL: import.meta.env.VITE_API_URL,
+   /* baseURL: `http://localhost:5000`, */
 });
 // AxiosInstance.interceptors.request.use(
 //   function (config) {

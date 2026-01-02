@@ -11,7 +11,8 @@ export const endPoints = {
         list:`/api/students/list`,
         update:`/api/students`,
         delete:`/api/students`,
-        attendance: `/api/students`
+        attendance: `/api/students`,
+        viewAttendance: `/api/students`
     }
 }
 

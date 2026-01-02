@@ -222,10 +222,11 @@ export default function Attendance() {
   // =============================
   // Mark Absent (Delete)
   // =============================
-  const markAbsent = async (studentId) => {
+  /* const markAbsent = async (studentId) => {
     console.log("➡️ Marking ABSENT");
     console.log("Student ID:", studentId);
     console.log("Date sent to backend:", dateInfo.date);
+
 
     try {
       const res = await AxiosInstance.delete(
@@ -247,6 +248,31 @@ export default function Attendance() {
     } catch (error) {
       console.error(
         "❌ Delete error:",
+        error.response?.data || error
+      );
+    }
+  }; */
+
+
+   const markAbsent = async (studentId) => {
+    console.log("➡️ Marking ABSENT");
+    console.log("Student ID:", studentId);
+
+    try {
+      const res = await AxiosInstance.post(
+        `${endPoints.student.attendance}/${studentId}/attendance`,
+        { present: false }
+      );
+
+      console.log("✅ Backend response (Present):", res.data);
+
+      setAttendanceMap((prev) => ({
+        ...prev,
+        [studentId]: true,
+      }));
+    } catch (error) {
+      console.error(
+        "❌ Present error:",
         error.response?.data || error
       );
     }

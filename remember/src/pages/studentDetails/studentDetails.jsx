@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import AxiosInstance from "../../api/axios/axios.js";
 import { endPoints } from "../../api/endPoints/endPoints.js";
 import UpdateStudentDetails from "../../component/updateStudentDetails/updateStudentDetails.jsx";
+import ViewAttendance from "../../component/viewAttendance/viewAttendance.jsx";
 
 export default function StudentDetails() {
   const { id } = useParams();
@@ -14,7 +15,10 @@ export default function StudentDetails() {
   const [feesPaidMonth, setFeesPaidMonth] = useState([]);
   const [weekDays, setWeekDays] = useState([]);
   const [showFeesMonth, setShowFeesMonth] = useState(4);
-  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showAttendance, setShowAttendance] = useState(false)
+    const openAttendanceModal = () => setShowAttendance(true);
+  const closeAttendanceModal = () => setShowAttendance(false);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -133,7 +137,7 @@ export default function StudentDetails() {
   return (
     <div className="detilsSection">
       <div className="container my-4">
-        {!showModal && (
+        {!showEditModal && (
           <div className="header">
             <h3>STUDENT DETAILS</h3>
           </div>
@@ -170,23 +174,26 @@ export default function StudentDetails() {
   <div className="editBtn">
     <button
       className="edit-details-btn"
-      onClick={() => setShowModal(true)}
+      onClick={() => setShowEditModal(true)}
     >
       ✏️ Edit Details
     </button>
 
-    {showModal && (
-      <UpdateStudentDetails onClose={() => setShowModal(false)} />
+    {showEditModal && (
+      <UpdateStudentDetails onClose={() => setShowEditModal(false)} />
     )}
   </div>
 
-  <button className="attendance-btn">
+  <button className="attendance-btn" onClick={()=> openAttendanceModal()}>
     📊 View Attendance
   </button>
+  {showAttendance && (
+    <ViewAttendance onClose={closeAttendanceModal}/>
+  )}
 </div>
 
         </div>
-        {!showModal && (
+        {!showEditModal && (
           <div className="monthSection">
             <div className="row g-3 justify-content-center custom-grid">
               {months.slice(0, showFeesMonth).map((month, index) => {
